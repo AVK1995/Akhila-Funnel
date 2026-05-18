@@ -30,7 +30,7 @@ export function HeroSection() {
         DESKTOP (sm:): container reverts to a normal block layout. The elements
         stack with their own `sm:mt-*` margins exactly as before.
       */}
-      <div className="container-tight relative flex flex-1 flex-col items-center justify-center gap-5 sm:block sm:flex-none sm:items-stretch sm:gap-0">
+      <div className="container-tight relative flex flex-1 flex-col items-center justify-center gap-5 sm:block sm:flex-none sm:items-stretch sm:gap-0 sm:text-center">
         {/* 1. Eyebrow pill */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
