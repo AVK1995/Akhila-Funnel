@@ -74,8 +74,11 @@ function CaseCard({ r }: { r: CaseResult }) {
         </div>
       </div>
 
-      {/* Footer — profile + tags */}
-      <div className="relative mt-5">
+      {/* Footer — profile + tags. mt-auto pushes it to the bottom of the
+          flex column so card bottoms line up evenly when stretched by the
+          grid (especially on desktop's 2-col layout). pt-5 keeps a min gap
+          from the section above. */}
+      <div className="relative mt-auto pt-5">
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400 sm:text-[12px]">
           Typical Profile
         </p>
@@ -154,19 +157,14 @@ export function ClientResultsSection() {
         </Reveal>
 
         {/*
-          MOBILE: block layout with sticky cards — each card sticks at top-4
-          so later cards scroll up and visually cover earlier ones. Z-index
-          rises with source order so the stack feels natural.
-          DESKTOP (sm+): standard 2-col grid, sticky disabled.
+          MOBILE: plain vertical stack with normal scroll.
+          DESKTOP (sm+): 2-col grid, items stretch to row height so cards
+          line up evenly regardless of how much their tags / outcomes wrap.
         */}
-        <div className="mt-12 space-y-5 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:gap-7">
+        <div className="mt-12 space-y-5 sm:mt-14 sm:grid sm:grid-cols-2 sm:items-stretch sm:gap-6 sm:space-y-0 lg:gap-7">
           {results.map((r, i) => (
-            <div
-              key={r.title}
-              className="sticky top-4 sm:static"
-              style={{ zIndex: i + 1 }}
-            >
-              <Reveal delay={i * 0.05}>
+            <div key={r.title} className="h-full">
+              <Reveal delay={i * 0.05} className="h-full">
                 <CaseCard r={r} />
               </Reveal>
             </div>
