@@ -157,13 +157,23 @@ export function ClientResultsSection() {
         </Reveal>
 
         {/*
-          MOBILE: plain vertical stack with normal scroll.
-          DESKTOP (sm+): 2-col grid, items stretch to row height so cards
-          line up evenly regardless of how much their tags / outcomes wrap.
+          MOBILE: sticky-stack scroll effect. Each card sticks at top-4 so
+          later cards scroll up and visually slide on top of earlier ones
+          (card 2 covers 1, card 3 covers 1+2, card 4 covers 1+2+3). Same
+          top offset on every card + later source order + ascending z-index
+          gives the layering naturally.
+
+          DESKTOP (sm+): 2-col grid, sticky disabled (`sm:static`). Items
+          stretch to row height so card bottoms line up evenly regardless
+          of how their tags / outcomes wrap.
         */}
         <div className="mt-12 space-y-5 sm:mt-14 sm:grid sm:grid-cols-2 sm:items-stretch sm:gap-6 sm:space-y-0 lg:gap-7">
           {results.map((r, i) => (
-            <div key={r.title} className="h-full">
+            <div
+              key={r.title}
+              className="sticky top-4 h-full sm:static"
+              style={{ zIndex: i + 1 }}
+            >
               <Reveal delay={i * 0.05} className="h-full">
                 <CaseCard r={r} />
               </Reveal>

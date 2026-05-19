@@ -113,9 +113,13 @@
     color: rgb(var(--color-fg));
   }
 
-  /* Mobile-first: prevent horizontal scroll from generous shadows */
+  /* Mobile-first: prevent horizontal scroll from generous shadows.
+   * Use `clip` (not `hidden`) so the body does NOT get promoted to a
+   * scroll container — otherwise `position: sticky` children would
+   * stick relative to body (which is the page height, so it never
+   * triggers) instead of the viewport. */
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Prevent iOS auto-zoom on small inputs */
