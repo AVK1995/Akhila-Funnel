@@ -132,6 +132,12 @@ const config: Config = {
         "drift-up": "driftUp 14s linear infinite",
         "sheen": "sheen 2.8s ease-in-out infinite",
         "gradient-pan": "gradientPan 8s ease-in-out infinite",
+        // Aurora layers for the hero — very slow, low-opacity drift.
+        // Distinct from float-soft (which is faster + same opacity).
+        // Individual durations are overridden inline per layer.
+        "aurora-drift": "auroraDrift 32s ease-in-out infinite",
+        "aurora-sweep": "auroraSweep 38s ease-in-out infinite",
+        "aurora-pulse": "auroraPulse 28s ease-in-out infinite",
       },
       keyframes: {
         fadeUp: {
@@ -154,6 +160,22 @@ const config: Config = {
           "0%, 100%": { transform: "translate(0, 0) scale(1)" },
           "33%": { transform: "translate(8px, -12px) scale(1.04)" },
           "66%": { transform: "translate(-6px, -6px) scale(0.98)" },
+        },
+        // Aurora keyframes — opacity is animated alongside transform so the
+        // layers feel like slow-breathing light, not just moving shapes.
+        // All stay under 0.20 opacity per the hero design brief.
+        auroraDrift: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.12" },
+          "33%": { transform: "translate(38px, -28px) scale(1.07)", opacity: "0.18" },
+          "66%": { transform: "translate(-30px, 18px) scale(0.94)", opacity: "0.09" },
+        },
+        auroraSweep: {
+          "0%, 100%": { transform: "translateX(-4%) scale(1)", opacity: "0.10" },
+          "50%": { transform: "translateX(6%) scale(1.05)", opacity: "0.18" },
+        },
+        auroraPulse: {
+          "0%, 100%": { transform: "scale(0.93)", opacity: "0.08" },
+          "50%": { transform: "scale(1.10)", opacity: "0.16" },
         },
         pulseRing: {
           "0%": { transform: "scale(1)", opacity: "0.6" },

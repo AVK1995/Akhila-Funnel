@@ -160,45 +160,60 @@
    * automatically re-themes the hero too. */
   .hero-mesh {
     background:
-      /* Center spotlight — bright halo behind the hero stack */
+      /* 1. Centre spotlight — defined warm halo on the content stack. */
       radial-gradient(
-        ellipse 90% 60% at 50% -8%,
-        hsl(22 88% 95% / 0.95) 0%,
-        hsl(22 88% 95% / 0) 60%
+        ellipse 60% 60% at 50% 45%,
+        hsl(22 95% 98% / 0.78) 0%,
+        hsl(22 95% 98% / 0) 60%
       ),
-      /* Top-left terracotta mesh blob */
-      radial-gradient(
-        ellipse 70% 50% at 12% 22%,
-        hsl(var(--wine-300) / 0.34) 0%,
-        hsl(var(--wine-300) / 0) 55%
-      ),
-      /* Bottom-right peach mesh blob */
-      radial-gradient(
-        ellipse 60% 55% at 88% 78%,
-        hsl(var(--wine-200) / 0.36) 0%,
-        hsl(var(--wine-200) / 0) 55%
-      ),
-      /* Mid-right warm amber accent */
-      radial-gradient(
-        ellipse 40% 35% at 95% 35%,
-        rgba(214, 156, 77, 0.14) 0%,
-        rgba(214, 156, 77, 0) 60%
-      ),
-      /* Base warm cream */
-      rgb(var(--color-bg));
+      /* 2. Directional warm wash — diagonal peach→cream→peach so the
+       *    base has a clear light source instead of feeling flat. */
+      linear-gradient(
+        135deg,
+        hsl(var(--wine-100) / 0.85) 0%,
+        hsl(var(--wine-50)) 50%,
+        hsl(var(--wine-100) / 0.65) 100%
+      );
+    background-color: rgb(var(--color-bg));
   }
-  .hero-mesh::before {
+  /* Modern dot grid as a separate masked layer so we can fade its
+   * visibility differently at the centre vs. edges without touching
+   * the spotlight / gradient underneath.
+   *
+   *   • Centre (where the headline + video + CTA stack sits)
+   *     ─→ grid fully visible (still subtle, won't compete with text)
+   *   • Sides + corners
+   *     ─→ grid fades out so the eye glides off the edges quietly
+   *
+   * Built with a radial mask. Dot opacity is intentionally higher
+   * (0.28) than the previous in-line version because the mask
+   * naturally fades it at the periphery. */
+  .hero-mesh::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.45;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.92  0 0 0 0 0.78  0 0 0 0 0.62  0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 220px 220px;
+    background-image: radial-gradient(
+      circle at center,
+      hsl(var(--wine-500) / 0.28) 1.5px,
+      transparent 2px
+    );
+    background-size: 28px 28px;
+    background-attachment: fixed;
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 75% at 50% 50%,
+      black 30%,
+      transparent 92%
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 75% at 50% 50%,
+      black 30%,
+      transparent 92%
+    );
   }
-  /* Keep hero content above the noise overlay. */
+  /* All hero children (FloatingOrbs + content container) sit above
+   * the masked grid layer. */
   .hero-mesh > * {
     position: relative;
     z-index: 1;

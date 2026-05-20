@@ -198,69 +198,26 @@ export function VideoThumbnail({
 }
 
 /**
- * FloatingOrbs — aurora-style backdrop. Pure CSS animation, no JS.
+ * FloatingOrbs — single ambient glow behind the hero video. Just
+ * enough slow drift to keep the section feeling alive without
+ * competing with the grid + gradient hero-mesh underneath.
+ *
+ * Respects prefers-reduced-motion.
  */
 export function FloatingOrbs() {
-  const orbs: Array<{
-    pos: string;
-    size: string;
-    bg: string;
-    blur: string;
-    duration: string;
-    delay: string;
-  }> = [
-    {
-      pos: "left-[6%] top-[8%]",
-      size: "h-[320px] w-[320px] sm:h-[420px] sm:w-[420px]",
-      bg: "bg-wine-200/55",
-      blur: "blur-[90px]",
-      duration: "16s",
-      delay: "0s",
-    },
-    {
-      pos: "right-[8%] top-[20%]",
-      size: "h-[280px] w-[280px] sm:h-[380px] sm:w-[380px]",
-      bg: "bg-gold-200/55",
-      blur: "blur-[110px]",
-      duration: "20s",
-      delay: "-4s",
-    },
-    {
-      pos: "left-[28%] bottom-[6%]",
-      size: "h-[300px] w-[300px] sm:h-[400px] sm:w-[400px]",
-      bg: "bg-wine-100/55",
-      blur: "blur-[100px]",
-      duration: "18s",
-      delay: "-8s",
-    },
-    {
-      pos: "right-[30%] bottom-[14%]",
-      size: "h-[240px] w-[240px] sm:h-[320px] sm:w-[320px]",
-      bg: "bg-gold-100/65",
-      blur: "blur-[80px]",
-      duration: "22s",
-      delay: "-12s",
-    },
-  ];
-
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      {orbs.map((o, i) => (
-        <span
-          key={i}
-          className={cn(
-            "absolute rounded-full mix-blend-multiply animate-float-soft",
-            o.pos,
-            o.size,
-            o.bg,
-            o.blur
-          )}
-          style={{
-            animationDuration: o.duration,
-            animationDelay: o.delay,
-          }}
-        />
-      ))}
+      <span
+        className={cn(
+          "absolute left-1/2 top-[50%] h-[55%] w-[65%] -translate-x-1/2 -translate-y-1/2",
+          "rounded-full bg-wine-300/20 blur-[120px]",
+          "animate-aurora-pulse motion-reduce:animate-none"
+        )}
+        style={{
+          animationDuration: "44s",
+          willChange: "transform, opacity",
+        }}
+      />
     </div>
   );
 }

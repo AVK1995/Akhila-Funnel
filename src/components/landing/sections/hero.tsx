@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { CtaLink } from "../shared-client";
-import { FloatingOrbs, OrganicBlob, VideoThumbnail } from "../shared-static";
+import { FloatingOrbs, VideoThumbnail } from "../shared-static";
 import { ArrowRightIcon, PlayIcon, ShieldIcon } from "../icons";
 import { publicEnv } from "@/lib/env";
 
@@ -10,14 +10,14 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="hero-mesh relative isolate flex min-h-[calc(100svh-44px)] flex-col overflow-hidden pb-6 pt-5 sm:justify-center sm:pt-10 lg:pt-12"
+      className="hero-mesh relative isolate flex min-h-[calc(100svh-44px)] flex-col overflow-hidden pb-6 pt-5 sm:pt-6 lg:pt-4"
     >
       {/* ── BACKGROUND ATMOSPHERE ───────────── */}
-      {/* hero-mesh provides the warm-peach mesh gradient + spotlight + noise
-          texture (see globals.css). The OrganicBlob + FloatingOrbs decorations
-          below layer on top for depth without fighting the mesh. */}
-      <OrganicBlob className="-left-40 top-10 -z-10 h-[420px] w-[420px] sm:-left-20 sm:h-[520px] sm:w-[520px]" from="hsl(var(--wine-600) / 0.16)" to="rgba(189, 127, 53, 0.08)" />
-      <OrganicBlob className="-right-40 bottom-10 -z-10 h-[440px] w-[440px] sm:-right-24 sm:h-[560px] sm:w-[560px]" from="rgba(189, 127, 53, 0.16)" to="hsl(var(--wine-600) / 0.08)" />
+      {/* hero-mesh (globals.css) lays the warm-cream paper base with a
+          center spotlight, mesh gradient, and noise texture. FloatingOrbs
+          (shared-static) adds the animated aurora layer on top — slow
+          drifting low-opacity glows + elongated light streaks for the
+          alive / expensive / futuristic-healthcare feel. */}
       <FloatingOrbs />
 
       {/*
@@ -47,7 +47,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="display-headline mx-auto max-w-3xl text-center text-[clamp(2rem,5.5vw+0.5rem,2.5rem)] leading-[1.1] tracking-tight sm:mt-5 sm:leading-[1.05]"
+          className="display-headline mx-auto max-w-3xl text-center text-[clamp(2rem,5.5vw+0.5rem,3rem)] leading-[1.1] tracking-tight sm:mt-5 sm:leading-[1.05]"
         >
           Fix your PCOS at the{" "}
           <span className="italic text-wine-700">root</span>{" "}
@@ -93,7 +93,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
           id="hero-video"
-          className="mx-auto w-full max-w-[34rem] sm:mt-3 sm:max-w-[38rem] lg:mt-4 lg:max-w-[40rem]"
+          className="mx-auto w-full max-w-[34rem] sm:mt-5 sm:max-w-[38rem] lg:mt-7 lg:max-w-[40rem]"
         >
           <div className="group relative isolate">
             <div
