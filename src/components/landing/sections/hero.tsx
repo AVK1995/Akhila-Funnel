@@ -16,8 +16,8 @@ export function HeroSection() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-30 bg-cream-grain" />
       <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 -z-20 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-wine-100/60 opacity-70 blur-[120px]" />
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -right-20 -z-20 h-[380px] w-[520px] rounded-full bg-gold-200/40 opacity-70 blur-[120px]" />
-      <OrganicBlob className="-left-40 top-10 -z-10 h-[420px] w-[420px] sm:-left-20 sm:h-[520px] sm:w-[520px]" from="rgba(115, 42, 61, 0.16)" to="rgba(193, 150, 50, 0.08)" />
-      <OrganicBlob className="-right-40 bottom-10 -z-10 h-[440px] w-[440px] sm:-right-24 sm:h-[560px] sm:w-[560px]" from="rgba(193, 150, 50, 0.16)" to="rgba(115, 42, 61, 0.08)" />
+      <OrganicBlob className="-left-40 top-10 -z-10 h-[420px] w-[420px] sm:-left-20 sm:h-[520px] sm:w-[520px]" from="hsl(var(--wine-600) / 0.16)" to="rgba(193, 150, 50, 0.08)" />
+      <OrganicBlob className="-right-40 bottom-10 -z-10 h-[440px] w-[440px] sm:-right-24 sm:h-[560px] sm:w-[560px]" from="rgba(193, 150, 50, 0.16)" to="hsl(var(--wine-600) / 0.08)" />
       <FloatingOrbs />
 
       {/*

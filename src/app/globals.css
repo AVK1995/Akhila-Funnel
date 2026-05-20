@@ -9,15 +9,11 @@
  * Change any of the three below, then restart `npm run dev`
  * (or rebuild prod). The new look propagates to every page.
  *
- *   1. BRAND COLOUR  ── --brand-h / --brand-s (this file, below)
- *      Hue + saturation of the wine palette. All 10 wine shades
- *      (wine-50 → wine-900) derive from these via fixed lightness.
- *      Hue is 0-360°. A few examples:
- *           • Default (wine red): h=342, s=50%
- *           • Royal blue:         h=222, s=55%
- *           • Forest green:       h=145, s=42%
- *           • Plum / aubergine:   h=300, s=40%
- *           • Terracotta / clay:  h=18,  s=55%
+ *   1. BRAND COLOUR  ── ten --wine-N triplets in :root below.
+ *      Each shade is independent (H S L%) so you can retune any
+ *      single step. Current palette is WARM PEACH / TERRACOTTA;
+ *      see the comment block in :root for the per-shade mapping
+ *      and a one-line revert to the original wine red.
  *
  *   2. DISPLAY FONT  ── headlines, eyebrows, callouts
  *      Edit src/app/layout.tsx → swap `Fraunces` with another
@@ -27,34 +23,46 @@
  *
  *   3. BODY FONT     ── paragraphs, form labels, UI text
  *      Same place — edit src/app/layout.tsx and swap `Inter`.
- *
- * Heads-up on the brand colour: the current wine palette is
- * hand-tuned. The HSL-derived palette below matches it closely
- * for the dark shades (700/800/900) and soft shades (50/100/200)
- * that dominate the UI, but mid-tones (300-600) may shift very
- * slightly. The site still feels coherent — you'd only notice
- * the drift in a few accent surfaces.
  * ============================================================ */
 
 @layer base {
   :root {
-    /* ★ 1. BRAND COLOUR KNOB ─────────────────────────────── */
-    --brand-h: 342;       /* hue, 0-360°  */
-    --brand-s: 50%;       /* saturation   */
-
-    /* Wine palette — derived from the two knobs above.
-     * Each shade is `H S L%` (space-separated, alpha-friendly).
-     * To override a specific shade only, write its own H S L% here. */
-    --wine-50:  var(--brand-h) var(--brand-s) 96%;
-    --wine-100: var(--brand-h) var(--brand-s) 92%;
-    --wine-200: var(--brand-h) var(--brand-s) 82%;
-    --wine-300: var(--brand-h) var(--brand-s) 70%;
-    --wine-400: var(--brand-h) var(--brand-s) 55%;
-    --wine-500: var(--brand-h) var(--brand-s) 41%;
-    --wine-600: var(--brand-h) var(--brand-s) 31%;
-    --wine-700: var(--brand-h) var(--brand-s) 24%;
-    --wine-800: var(--brand-h) var(--brand-s) 17%;
-    --wine-900: var(--brand-h) var(--brand-s) 12%;
+    /* ★ BRAND PALETTE — WARM PEACH / TERRACOTTA
+     *
+     * The shade naming stays "wine-*" so every Tailwind class on the
+     * site (bg-wine-700, text-wine-700, border-wine-200/40 …) keeps
+     * working. Each --wine-N is an HSL triplet (H S L%) consumed via
+     * `hsl(var(--wine-N) / <alpha-value>)`, so opacity modifiers like
+     * `bg-wine-700/40` still compile correctly.
+     *
+     * Anchor colours from the design palette:
+     *   --wine-50  = Cream White  #FFF9F5
+     *   --wine-100 = Soft Peach   #FDEEE4
+     *   --wine-300 = Peach        #F4B89A
+     *   --wine-700 = Terracotta   #D26C3C  ← PRIMARY (buttons, CTAs)
+     *   --wine-900 = Warm Black   #2A1A0E
+     *
+     * Mid-shades (400/500/600) interpolate between Peach and Terracotta;
+     * 800 sits between Terracotta and Warm Black. Override any single
+     * line below to retune that step.
+     *
+     * To revert to the original wine red palette, replace this block:
+     *   --wine-50:  342 50% 96%;   --wine-100: 342 50% 92%;
+     *   --wine-200: 342 50% 82%;   --wine-300: 342 50% 70%;
+     *   --wine-400: 342 50% 55%;   --wine-500: 342 50% 41%;
+     *   --wine-600: 342 50% 31%;   --wine-700: 342 50% 24%;
+     *   --wine-800: 342 50% 17%;   --wine-900: 342 50% 12%;
+     */
+    --wine-50:  24 100% 98%;   /* #FFF9F5 Cream White */
+    --wine-100: 22  88% 95%;   /* #FDEEE4 Soft Peach  */
+    --wine-200: 24  86% 87%;
+    --wine-300: 19  80% 78%;   /* #F4B89A Peach       */
+    --wine-400: 19  72% 70%;
+    --wine-500: 19  65% 62%;
+    --wine-600: 19  64% 56%;
+    --wine-700: 19  63% 53%;   /* #D26C3C Terracotta — PRIMARY */
+    --wine-800: 19  58% 34%;
+    --wine-900: 24  49% 11%;   /* #2A1A0E Warm Black  */
 
     /* Legacy aliases — kept so a few selection/focus rules below
      * keep working without churn. They now track the brand knob. */
@@ -258,26 +266,26 @@
   }
 
   .icon-disc-wine {
-    background: linear-gradient(135deg, #B85F73 0%, #933D52 45%, #5A1E30 100%);
-    color: #FBF3F5;
+    background: linear-gradient(135deg, hsl(var(--wine-400)) 0%, hsl(var(--wine-500)) 45%, hsl(var(--wine-700)) 100%);
+    color: hsl(var(--wine-50));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.22),
       inset 0 -8px 14px -8px rgba(0, 0, 0, 0.5),
-      0 8px 20px -6px rgba(115, 42, 61, 0.55),
+      0 8px 20px -6px hsl(var(--wine-600) / 0.55),
       0 0 24px -6px rgba(212, 178, 71, 0.25);
   }
   .icon-disc-wine:hover {
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       inset 0 -8px 14px -8px rgba(0, 0, 0, 0.55),
-      0 14px 28px -6px rgba(115, 42, 61, 0.7),
+      0 14px 28px -6px hsl(var(--wine-600) / 0.7),
       0 0 36px -6px rgba(212, 178, 71, 0.5);
     transform: translateY(-1px) scale(1.04);
   }
 
   .icon-disc-gold {
     background: linear-gradient(135deg, #F5EDD0 0%, #E2CB6E 50%, #C19632 100%);
-    color: #421624;
+    color: hsl(var(--wine-800));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.6),
       inset 0 -6px 12px -6px rgba(115, 88, 28, 0.4),
@@ -306,7 +314,7 @@
   /* Big hero shield used inside the Guarantee section's dark card */
   .icon-disc-glass-hero {
     background: linear-gradient(135deg, #E2CB6E 0%, #C19632 55%, #A07825 100%);
-    color: #2D0E18;
+    color: hsl(var(--wine-900));
     box-shadow:
       inset 0 2px 0 rgba(255, 255, 255, 0.55),
       inset 0 -10px 24px -10px rgba(115, 88, 28, 0.5),
@@ -334,16 +342,16 @@
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.7) 0%,
-      rgba(251, 243, 245, 0.55) 100%
+      hsl(var(--wine-50) / 0.55) 100%
     );
     -webkit-backdrop-filter: blur(10px) saturate(130%);
     backdrop-filter: blur(10px) saturate(130%);
-    border: 1px solid rgba(115, 42, 61, 0.12);
+    border: 1px solid hsl(var(--wine-600) / 0.12);
   }
   .glass-dark {
     background: linear-gradient(
       135deg,
-      rgba(90, 30, 48, 0.85) 0%,
+      hsl(var(--wine-700) / 0.85) 0%,
       rgba(66, 22, 36, 0.9) 100%
     );
     -webkit-backdrop-filter: blur(10px) saturate(120%);
@@ -354,7 +362,7 @@
   /* ─── Sticky CTA — breathing wine pill with shimmer ──────────────────── */
   .sticky-cta {
     @apply relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-5 py-3 text-[14px] font-medium text-cream-50 sm:px-6 sm:py-3.5 sm:text-[15px];
-    background: linear-gradient(120deg, #5A1E30 0%, #732A3D 50%, #5A1E30 100%);
+    background: linear-gradient(120deg, hsl(var(--wine-700)) 0%, hsl(var(--wine-600)) 50%, hsl(var(--wine-700)) 100%);
     background-size: 200% 100%;
     animation: gradientPan 6s ease-in-out infinite, breathe 3.2s ease-in-out infinite;
   }
@@ -418,8 +426,8 @@
     width: 100%;
     height: 100%;
     border-radius: 9999px;
-    background: linear-gradient(135deg, #933D52 0%, #5A1E30 100%);
-    box-shadow: 0 0 0 1.5px rgba(251, 243, 245, 0.9), 0 0 8px rgba(147, 61, 82, 0.4);
+    background: linear-gradient(135deg, hsl(var(--wine-500)) 0%, hsl(var(--wine-700)) 100%);
+    box-shadow: 0 0 0 1.5px hsl(var(--wine-50) / 0.9), 0 0 8px hsl(var(--wine-500) / 0.4);
   }
 
   /* ─── Section curve dividers ─────────────────────────────────────────── */
@@ -468,7 +476,7 @@
   .bg-grain {
     background-image: radial-gradient(
       circle at 1px 1px,
-      rgba(115, 42, 61, 0.04) 1px,
+      hsl(var(--wine-600) / 0.04) 1px,
       transparent 0
     );
     background-size: 28px 28px;
@@ -476,7 +484,7 @@
 
   /* Premium gradient text */
   .text-gradient-wine {
-    background: linear-gradient(135deg, #5A1E30 0%, #933D52 100%);
+    background: linear-gradient(135deg, hsl(var(--wine-700)) 0%, hsl(var(--wine-500)) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -512,12 +520,12 @@
 @keyframes breathe {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 12px 32px -10px rgba(115, 42, 61, 0.45),
+    box-shadow: 0 12px 32px -10px hsl(var(--wine-600) / 0.45),
                 0 0 0 0 rgba(193, 150, 50, 0.6);
   }
   50% {
     transform: scale(1.035);
-    box-shadow: 0 18px 44px -12px rgba(115, 42, 61, 0.55),
+    box-shadow: 0 18px 44px -12px hsl(var(--wine-600) / 0.55),
                 0 0 0 12px rgba(193, 150, 50, 0);
   }
 }

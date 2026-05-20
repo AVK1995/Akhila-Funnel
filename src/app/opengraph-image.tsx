@@ -40,7 +40,7 @@ export default async function OGImage() {
             height: 520,
             borderRadius: 260,
             background:
-              "radial-gradient(circle, rgba(115, 42, 61, 0.18) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(210, 108, 60, 0.18) 0%, transparent 70%)",
           }}
         />
         <div
@@ -65,13 +65,13 @@ export default async function OGImage() {
               width: 56,
               height: 56,
               borderRadius: 28,
-              background: "linear-gradient(135deg, #5A1E30 0%, #933D52 100%)",
-              color: "#FDFBF7",
+              background: "linear-gradient(135deg, #B85A30 0%, #D26C3C 100%)",
+              color: "#FFF9F5",
               fontSize: 28,
               fontWeight: 700,
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 8px 24px rgba(90, 30, 48, 0.25)",
+              boxShadow: "0 8px 24px rgba(210, 108, 60, 0.25)",
             }}
           >
             A
@@ -136,7 +136,7 @@ export default async function OGImage() {
             <div
               style={{
                 display: "flex",
-                color: "#5A1E30",
+                color: "#D26C3C",
                 fontStyle: "italic",
               }}
             >
@@ -153,7 +153,7 @@ export default async function OGImage() {
             gap: 36,
             alignItems: "center",
             paddingTop: 20,
-            borderTop: "1px solid rgba(115, 42, 61, 0.15)",
+            borderTop: "1px solid rgba(210, 108, 60, 0.15)",
           }}
         >
           {[

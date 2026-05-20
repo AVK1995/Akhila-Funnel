@@ -94,9 +94,9 @@ export function PlayButton3D({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
         className="relative flex h-full w-full items-center justify-center rounded-full text-cream-50 transition-transform duration-300 ease-smooth group-hover/play:scale-110 group-hover:scale-110"
         style={{
           background:
-            "linear-gradient(135deg, #C97889 0%, #B85F73 30%, #933D52 60%, #5A1E30 100%)",
+            "linear-gradient(135deg, hsl(var(--wine-300)) 0%, hsl(var(--wine-400)) 30%, hsl(var(--wine-500)) 60%, hsl(var(--wine-700)) 100%)",
           boxShadow:
-            "0 14px 36px -6px rgba(115, 42, 61, 0.65), 0 0 80px -10px rgba(229, 203, 110, 0.5), inset 0 3px 0 rgba(255, 255, 255, 0.45), inset 0 -8px 16px -6px rgba(45, 14, 24, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.12)",
+            "0 14px 36px -6px hsl(var(--wine-600) / 0.65), 0 0 80px -10px rgba(229, 203, 110, 0.5), inset 0 3px 0 rgba(255, 255, 255, 0.45), inset 0 -8px 16px -6px rgba(45, 14, 24, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.12)",
         }}
       >
         <PlayIcon className={cn("ml-0.5 drop-shadow-[0_2px_4px_rgba(45,14,24,0.4)]", playSize[size])} />
@@ -270,7 +270,7 @@ export function FloatingOrbs() {
  */
 export function OrganicBlob({
   className,
-  from = "rgba(115, 42, 61, 0.18)",
+  from = "hsl(var(--wine-600) / 0.18)",
   to = "rgba(193, 150, 50, 0.12)",
 }: {
   className?: string;

@@ -98,12 +98,16 @@ const config: Config = {
         "premium-lg": "0 4px 8px -2px rgba(45, 14, 24, 0.05), 0 16px 40px -8px rgba(45, 14, 24, 0.12)",
         "premium-xl": "0 8px 16px -4px rgba(45, 14, 24, 0.06), 0 32px 64px -12px rgba(45, 14, 24, 0.16)",
         "gold-glow": "0 0 0 1px rgba(193, 150, 50, 0.12), 0 8px 24px -8px rgba(193, 150, 50, 0.3)",
-        "wine-glow": "0 0 0 1px rgba(115, 42, 61, 0.16), 0 12px 32px -10px rgba(115, 42, 61, 0.4)",
+        // wine-glow tracks the brand colour via --wine-700 in globals.css
+        "wine-glow": "0 0 0 1px hsl(var(--wine-700) / 0.18), 0 12px 32px -10px hsl(var(--wine-700) / 0.45)",
         "inset-soft": "inset 0 1px 2px rgba(45, 14, 24, 0.04)",
       },
       backgroundImage: {
         "cream-grain": "radial-gradient(at 30% 20%, rgba(245, 239, 226, 0.6) 0px, transparent 50%), radial-gradient(at 80% 70%, rgba(237, 223, 161, 0.25) 0px, transparent 50%)",
-        "wine-gradient": "linear-gradient(135deg, #5A1E30 0%, #732A3D 50%, #933D52 100%)",
+        // wine-gradient tracks the brand palette via CSS vars so a swap
+        // in globals.css instantly re-themes the marquee, sticky CTA bar,
+        // and other dark wine-tone surfaces.
+        "wine-gradient": "linear-gradient(135deg, hsl(var(--wine-700)) 0%, hsl(var(--wine-600)) 50%, hsl(var(--wine-500)) 100%)",
         "gold-gradient": "linear-gradient(135deg, #D4B247 0%, #C19632 50%, #A07825 100%)",
         "section-fade": "linear-gradient(180deg, transparent 0%, rgba(250, 246, 238, 0.8) 100%)",
       },

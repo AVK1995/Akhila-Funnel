@@ -882,7 +882,7 @@ export default function CheckoutPage() {
           contact: lead.phone,
         },
         notes: { leadId: lead.leadId },
-        theme: { color: "#5A1E30" },
+        theme: { color: "#D26C3C" },
         modal: { ondismiss: () => setSubmitting(false) },
         handler: async (response: RazorpayResponse) => {
           try {
